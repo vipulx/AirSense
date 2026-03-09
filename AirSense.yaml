@@ -1,14 +1,12 @@
 esphome:
   name: airsense
-  friendly_name: AirSense
+  friendly_name: airsense
 
 esp8266:
   board: d1_mini
 
-# Enable logging
 logger:
 
-# Enable Home Assistant API
 api:
   encryption:
     key: "t2MsxwhRvfqnl91zC61uj+0xoztTlRPUrmXxhIbWsmQ="
@@ -17,12 +15,10 @@ ota:
   - platform: esphome
     password: "a02bad096bd3fb448129d198f4b3286c"
 
-
 wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
 
-  # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
     ssid: "Airsense Fallback Hotspot"
     password: "$iddhart@Wif@0152"
@@ -45,13 +41,68 @@ binary_sensor:
       number: D4
       inverted: true
 
+  - platform: status
+    name: "AirSense Status"
+
+button:
+  - platform: restart
+    name: "AirSense Restart"
+
 sensor:
+
   - platform: pm1006
     pm_2_5:
       name: "Particulate Matter 2.5µm Concentration"
+      id: pm_sensor
 
+  - platform: wifi_signal
+    name: "AirSense WiFi Percent"
+    update_interval: 60s
+    filters:
+      - lambda: return min(max(2 * (x + 100.0), 0.0), 100.0);
+    unit_of_measurement: "%"
+
+  # Raw ADC voltage
   - platform: adc
-    id: light_sensor
-    name: "Light sensor"
+    id: light_voltage
+    name: "Light Sensor Voltage"
     pin: A0
     update_interval: 1s
+    unit_of_measurement: "V"
+    accuracy_decimals: 4
+
+  # Brightness percentage derived from voltage
+  - platform: template
+    name: "Light Brightness"
+    unit_of_measurement: "%"
+    accuracy_decimals: 0
+    update_interval: 1s
+    lambda: |-
+      float v = id(light_voltage).state;
+
+      float percent = (v - 0.001) / (0.01 - 0.001) * 100.0;
+
+      if (percent > 100) percent = 100;
+      if (percent < 0) percent = 0;
+
+      return percent;
+
+  - platform: uptime
+    name: "AirSense Uptime"
+
+text_sensor:
+
+  - platform: template
+    name: "Air Quality Status"
+    lambda: |-
+      if (id(pm_sensor).state < 35) return {"Good"};
+      else if (id(pm_sensor).state < 75) return {"Moderate"};
+      else return {"Poor"};
+
+  - platform: wifi_info
+    ip_address:
+      name: "AirSense IP"
+    ssid:
+      name: "AirSense SSID"
+    mac_address:
+      name: "AirSense MAC"
