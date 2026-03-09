@@ -1,85 +1,32 @@
 # AirSense – Hacked IKEA VINDRIKTNING Smart Air Monitor
 
-AirSense is a modified version of the **IKEA VINDRIKTNING Air Quality Sensor** where the original hardware was **reverse-engineered and upgraded** with a **ESP8266 D1 Mini** running **ESPHome** to integrate it with **Home Assistant**.
+![Project Banner](images/banner.jpg)
 
-Instead of using the stock LED-only indication from IKEA, this project exposes detailed environmental data, diagnostics, and device controls through a smart home dashboard.
+AirSense is a modified version of the **IKEA VINDRIKTNING Air Quality Sensor** where the original hardware was reverse-engineered and upgraded with a **ESP8266 D1 Mini** running **ESPHome** to integrate it with **Home Assistant**.
 
-This is a **hardware hacking + IoT integration project** designed to transform a simple air quality monitor into a fully connected environmental sensor.
+Instead of the stock LED-only indicator, this project exposes detailed environmental data, device diagnostics, and remote controls through a smart home dashboard.
 
 ---
 
 # Project Overview
 
+![System Overview](images/overview.jpg)
+
 The original IKEA device contains a **PM1006 particulate matter sensor** but only shows air quality using a colored LED.
 
 This project taps into the sensor's **UART interface** and adds a WiFi-enabled microcontroller to expose the data digitally.
 
-Additional monitoring and diagnostics features were also implemented.
-
----
-
-# Features
-
-### Air Quality Monitoring
-
-* PM2.5 concentration data
-* Air quality classification (Good / Moderate / Poor)
-
-### Smart Home Integration
-
-* Direct integration with **Home Assistant**
-* Real-time sensor updates
-* Dashboard visualization
-
-### Environmental Awareness
-
-* Ambient light sensing with brightness percentage
-* Raw voltage monitoring for calibration
-
-### Device Monitoring
-
-* WiFi signal strength monitoring
-* Device uptime tracking
-* ESP8266 internal temperature
-* Free heap memory monitoring
-
-### Hardware Status
-
-* Fan activity detection
-* Device online status monitoring
-
-### Remote Control
-
-* Remote restart button
-* OTA firmware updates
-
-### Network Diagnostics
-
-* IP address reporting
-* WiFi SSID information
-* MAC address display
-
----
-
-# Hardware Used
-
-| Component                            | Purpose                                      |
-| ------------------------------------ | -------------------------------------------- |
-| IKEA VINDRIKTNING Air Quality Sensor | Base air quality monitor                     |
-| ESP8266 D1 Mini                      | WiFi IoT controller                          |
-| PM1006                               | Particulate Matter sensor (inside IKEA unit) |
-| LDR                                  | Ambient light sensing                        |
-| Voltage divider                      | Light measurement interface                  |
+Additional monitoring and diagnostics features were implemented to make the device fully IoT-enabled.
 
 ---
 
 # Hardware Hack
 
-The IKEA VINDRIKTNING internally contains a **PM1006 particulate matter sensor** connected via UART.
+![Hardware Modification](images/hardware_mod.jpg)
 
-By opening the device and tapping into the sensor's **TX line**, the data can be read directly by the ESP8266.
+The IKEA unit was opened and the internal **PM1006 air quality sensor** UART output was connected to the ESP8266.
 
-Connections used:
+### Wiring
 
 | PM1006 | ESP8266 |
 | ------ | ------- |
@@ -87,99 +34,135 @@ Connections used:
 | GND    | GND     |
 | VCC    | 5V      |
 
-An **LDR circuit** was also added to measure ambient light conditions.
+An **LDR circuit** was added to measure ambient brightness.
 
 ---
 
-# ESPHome Sensors Exposed
+# Internal Wiring
 
-The device publishes the following sensors:
+![Internal Wiring](images/internal_wiring.jpg)
 
-| Sensor               | Description                           |
-| -------------------- | ------------------------------------- |
-| PM2.5 Concentration  | Air pollution level                   |
-| Air Quality Status   | Good / Moderate / Poor classification |
-| Light Sensor Voltage | Raw LDR voltage                       |
-| Light Brightness     | Ambient brightness percentage         |
-| WiFi Signal          | Network signal strength               |
-| ESP8266 Temperature  | Internal chip temperature             |
-| Free Heap            | Available memory                      |
-| Uptime               | Device runtime                        |
+Inside the enclosure:
+
+* ESP8266 D1 Mini mounted internally
+* UART connection to PM1006 sensor
+* LDR connected to A0
+* Power tapped from device supply
+
+---
+
+# Home Assistant Dashboard
+
+![Home Assistant Dashboard](images/dashboard.jpg)
+
+Once connected to **Home Assistant**, the device provides real-time monitoring:
+
+* Air quality graphs
+* Light brightness percentage
+* Device health information
+* WiFi diagnostics
+
+---
+
+# Features
+
+### Air Quality Monitoring
+
+* PM2.5 concentration
+* Air quality classification
+
+### Environmental Monitoring
+
+* Ambient brightness detection
+* Raw light sensor voltage
+
+### Device Diagnostics
+
+* WiFi signal strength
+* Device uptime
+* ESP8266 internal temperature
+* Free memory monitoring
+
+### Hardware Monitoring
+
+* Fan activity detection
+* Device online status
+
+### Remote Control
+
+* OTA firmware updates
+* Restart control
+
+---
+
+# Sensors Exposed
+
+| Sensor              | Description               |
+| ------------------- | ------------------------- |
+| PM2.5 Concentration | Air pollution level       |
+| Air Quality Status  | Good / Moderate / Poor    |
+| Light Voltage       | Raw LDR voltage           |
+| Light Brightness    | Ambient brightness %      |
+| WiFi Signal         | Network signal strength   |
+| ESP Temperature     | Internal chip temperature |
+| Free Heap           | Available memory          |
+| Uptime              | Device runtime            |
 
 Binary sensors:
 
-| Sensor        | Description                       |
-| ------------- | --------------------------------- |
-| Fan Running   | Detects air purifier fan activity |
-| Device Status | Online/offline status             |
-
----
-
-# OTA Firmware Updates
-
-Firmware can be updated remotely using **ESPHome OTA**, eliminating the need to reopen the device.
-
----
-
-# Example Dashboard
-
-When connected to **Home Assistant**, the device provides:
-
-* Real-time air quality graph
-* Light level monitoring
-* Device health diagnostics
-* Smart home automation triggers
+| Sensor        | Description           |
+| ------------- | --------------------- |
+| Fan Running   | Detects fan operation |
+| Device Status | Online / offline      |
 
 ---
 
 # Possible Automations
 
-Example automations enabled by this project:
+Using **Home Assistant**:
 
-* Turn on ventilation when PM2.5 exceeds threshold
-* Dim dashboard screens when room becomes dark
+* Turn on ventilation when PM2.5 rises
+* Dim dashboards when room becomes dark
 * Notify when air quality degrades
 * Monitor device health remotely
 
 ---
 
-# Motivation
-
-The stock **IKEA VINDRIKTNING Air Quality Sensor** only provides a basic LED indicator.
-
-This project unlocks the full potential of the internal sensor by exposing real sensor data and integrating it into a smart home ecosystem.
-
----
-
 # Future Improvements
 
-Possible upgrades:
-
-* AQI calculation using EPA standards
+* AQI calculation
+* MQTT integration
 * Local display dashboard
-* MQTT support
 * Multi-room air quality mapping
-
----
-
-# License
-
-Open-source project for experimentation and learning.
 
 ---
 
 # Author
 
 Vipul Raj
-
 IoT Developer | Hardware Hacker | Smart Home Enthusiast
 
 ---
 
-# Useful Resources
+# Resources
 
 ESPHome Documentation
 [https://esphome.io](https://esphome.io)
 
 Home Assistant Documentation
 [https://www.home-assistant.io](https://www.home-assistant.io)
+
+---
+
+## Suggested Image Folder Structure
+
+```text
+project/
+ ├─ README.md
+ └─ images/
+      banner.jpg
+      overview.jpg
+      hardware_mod.jpg
+      internal_wiring.jpg
+      dashboard.jpg
+```
