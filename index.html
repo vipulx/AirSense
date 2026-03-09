@@ -5,30 +5,71 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AirSense – Smart Air Monitor</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
-body{color:#fff;background:#0f172a;overflow-x:hidden}
 
-/* Animated gradient background */
+body{
+color:white;
+background:#020617;
+overflow-x:hidden;
+}
+
+/* Animated Gradient Background */
 body::before{
 content:"";
 position:fixed;
-left:0;top:0;width:100%;height:100%;
-background:linear-gradient(120deg,#1e3a8a,#0ea5e9,#22c55e,#1e3a8a);
-background-size:300% 300%;
-animation:gradientMove 15s ease infinite;
-z-index:-2;
+left:0;
+top:0;
+width:100%;
+height:100%;
+background:linear-gradient(130deg,#0f172a,#1e3a8a,#0284c7,#22c55e,#0f172a);
+background-size:400% 400%;
+animation:gradient 18s ease infinite;
+z-index:-3;
 }
 
-@keyframes gradientMove{
+@keyframes gradient{
 0%{background-position:0% 50%}
 50%{background-position:100% 50%}
 100%{background-position:0% 50%}
 }
 
-/* floating particles */
-canvas{position:fixed;top:0;left:0;z-index:-1}
+/* Particle canvas */
+canvas{
+position:fixed;
+left:0;
+top:0;
+z-index:-2;
+}
 
+/* Navigation */
+nav{
+position:fixed;
+top:0;
+width:100%;
+padding:18px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:rgba(0,0,0,0.2);
+backdrop-filter:blur(10px);
+z-index:100;
+}
+
+nav h3{font-weight:600}
+
+nav a{
+color:white;
+text-decoration:none;
+margin-left:20px;
+opacity:0.8;
+transition:0.3s;
+}
+
+nav a:hover{opacity:1}
+
+/* Hero */
 header{
 height:100vh;
 display:flex;
@@ -36,158 +77,257 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
-padding:40px
+padding:40px;
 }
 
-h1{
-font-size:64px;
+header h1{
+font-size:72px;
 font-weight:700;
-margin-bottom:20px;
-letter-spacing:2px
+letter-spacing:3px;
+animation:fadeUp 1s ease;
 }
 
-h2{
-font-weight:300;
-opacity:.9;
-margin-bottom:40px
+header p{
+margin-top:20px;
+font-size:20px;
+opacity:0.85;
+max-width:700px;
+animation:fadeUp 1.4s ease;
 }
 
-.btn{
-padding:14px 30px;
+.hero-btn{
+margin-top:35px;
+padding:15px 35px;
 border-radius:30px;
 background:#22c55e;
-color:#fff;
-text-decoration:none;
 font-weight:600;
-transition:.3s
+text-decoration:none;
+color:white;
+transition:0.3s;
 }
 
-.btn:hover{transform:translateY(-3px)}
+.hero-btn:hover{
+transform:translateY(-4px) scale(1.03);
+box-shadow:0 10px 30px rgba(34,197,94,0.4);
+}
 
+/* Sections */
 section{
-padding:80px 10%;
+padding:100px 10%;
 max-width:1200px;
-margin:auto
+margin:auto;
 }
 
+section h2{
+font-size:38px;
+margin-bottom:30px;
+}
+
+section p{
+opacity:0.85;
+line-height:1.6;
+}
+
+/* Feature grid */
 .grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:30px
+gap:28px;
+margin-top:40px;
 }
 
 .card{
-background:rgba(255,255,255,.08);
-backdrop-filter:blur(10px);
-padding:30px;
+background:rgba(255,255,255,0.07);
 border-radius:18px;
-transition:.4s
+padding:30px;
+backdrop-filter:blur(12px);
+transition:0.4s;
+border:1px solid rgba(255,255,255,0.05);
 }
 
 .card:hover{
-transform:translateY(-10px);
-background:rgba(255,255,255,.15)
+transform:translateY(-12px) scale(1.02);
+background:rgba(255,255,255,0.14);
+box-shadow:0 15px 40px rgba(0,0,0,0.5);
 }
 
 .card h3{margin-bottom:10px}
 
-.image-showcase{
-text-align:center
+/* Image section */
+.image-block{
+text-align:center;
 }
 
-.image-showcase img{
-max-width:100%;
+.image-block img{
+width:100%;
+max-width:850px;
 border-radius:20px;
-margin-top:20px
+margin-top:30px;
+box-shadow:0 20px 60px rgba(0,0,0,0.6);
+transition:0.5s;
 }
 
+.image-block img:hover{
+transform:scale(1.03);
+}
+
+/* Stats */
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+margin-top:40px;
+}
+
+.stat{
+background:rgba(255,255,255,0.07);
+padding:30px;
+border-radius:15px;
+text-align:center;
+}
+
+.stat h3{
+font-size:40px;
+color:#22c55e;
+}
+
+/* Footer */
 footer{
 text-align:center;
-padding:40px;
-opacity:.7
+padding:50px;
+opacity:0.7;
 }
+
+/* Animations */
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(30px)
+}
+
+to{
+opacity:1;
+transform:translateY(0)
+}
+}
+
+.reveal{
+opacity:0;
+transform:translateY(50px);
+transition:1s;
+}
+
+.reveal.active{
+opacity:1;
+transform:translateY(0);
+}
+
 </style>
 </head>
+
 <body>
 
 <canvas id="particles"></canvas>
 
+<nav>
+<h3>AirSense</h3>
+<div>
+<a href="#about">About</a>
+<a href="#features">Features</a>
+<a href="#hardware">Hardware</a>
+</div>
+</nav>
+
 <header>
 <h1>AirSense</h1>
-<h2>Hacked IKEA VINDRIKTNING Smart Air Monitor</h2>
-<a class="btn" href="#about">Explore Project</a>
+<p>Transforming a simple air quality sensor into a powerful smart IoT monitoring system integrated with modern home automation.</p>
+<a class="hero-btn" href="#features">Explore Features</a>
 </header>
 
-<section id="about">
+<section id="about" class="reveal">
 <h2>Project Overview</h2>
 <p>
-AirSense transforms a basic air quality monitor into a fully connected smart device. Using an ESP8266 and custom firmware, the device streams environmental data directly to a smart home dashboard with real‑time monitoring and automation capabilities.
+AirSense is a hardware‑hacked air quality monitor upgraded with WiFi connectivity and smart home integration. It exposes environmental data such as particulate matter levels, ambient light, and device diagnostics to a real‑time dashboard for monitoring and automation.
 </p>
+
+<div class="stats">
+<div class="stat"><h3>PM2.5</h3><p>Air Pollution Monitoring</p></div>
+<div class="stat"><h3>WiFi</h3><p>Smart Home Integration</p></div>
+<div class="stat"><h3>OTA</h3><p>Remote Updates</p></div>
+<div class="stat"><h3>ESP</h3><p>Custom Firmware</p></div>
+</div>
+
 </section>
 
-<section>
+<section id="features" class="reveal">
 <h2>Key Features</h2>
+
 <div class="grid">
 
 <div class="card">
-<h3>Air Quality Monitoring</h3>
-<p>Real‑time PM2.5 monitoring using the internal sensor with smart home integration.</p>
-</div>
-
-<div class="card">
-<h3>WiFi Connectivity</h3>
-<p>Wireless integration enabling live data dashboards and remote firmware updates.</p>
+<h3>Real‑Time Air Monitoring</h3>
+<p>Continuously measures particulate matter and sends updates to the smart home dashboard.</p>
 </div>
 
 <div class="card">
 <h3>Ambient Light Detection</h3>
-<p>Built‑in brightness sensing for automation and dashboard brightness control.</p>
+<p>Detects room brightness and enables automation such as dashboard dimming.</p>
 </div>
 
 <div class="card">
 <h3>Device Diagnostics</h3>
-<p>Tracks uptime, memory usage, WiFi signal strength, and device health.</p>
+<p>Monitors uptime, memory usage, WiFi signal strength, and system health.</p>
+</div>
+
+<div class="card">
+<h3>Smart Home Automation</h3>
+<p>Trigger automations like ventilation alerts when air quality drops.</p>
 </div>
 
 </div>
 </section>
 
-<section class="image-showcase">
-<h2>Hardware Hack</h2>
-<p>ESP8266 integrated inside the air sensor with UART data tapping.</p>
-<img src="images/hardware_mod.png" alt="hardware image">
+<section id="hardware" class="image-block reveal">
+<h2>Hardware Modification</h2>
+<p>The internal particulate sensor was tapped through UART and connected to a WiFi microcontroller for data streaming.</p>
+
+<img src="images/hardware_mod.png" alt="hardware">
 </section>
 
-<section class="image-showcase">
-<h2>Smart Home Dashboard</h2>
-<p>Live data visualized on the home automation dashboard.</p>
-<img src="images/airsense_dashboard.png" alt="dashboard image">
+<section class="image-block reveal">
+<h2>Dashboard Visualization</h2>
+<p>Environmental data visualized through a smart home dashboard interface.</p>
+
+<img src="images/airsense_dashboard.png" alt="dashboard">
 </section>
 
 <footer>
-<p>Developed by Vipul Raj</p>
+<p>Developed by Vipul Raj – IoT Developer</p>
 </footer>
 
 <script>
-const canvas=document.getElementById('particles');
-const ctx=canvas.getContext('2d');
+
+/* Particle Background */
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+
 canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
 
 let particles=[];
 
-for(let i=0;i<120;i++){
+for(let i=0;i<140;i++){
 particles.push({
 x:Math.random()*canvas.width,
 y:Math.random()*canvas.height,
-r:Math.random()*2,
-d:Math.random()*1
+r:Math.random()*2.2,
+d:Math.random()*0.7
 });
 }
 
 function draw(){
 ctx.clearRect(0,0,canvas.width,canvas.height);
-ctx.fillStyle='rgba(255,255,255,0.6)';
+ctx.fillStyle="rgba(255,255,255,0.7)";
 ctx.beginPath();
 
 for(let i=0;i<particles.length;i++){
@@ -204,6 +344,7 @@ function update(){
 for(let i=0;i<particles.length;i++){
 let p=particles[i];
 p.y+=p.d;
+
 if(p.y>canvas.height){
 p.y=0;
 p.x=Math.random()*canvas.width;
@@ -212,6 +353,18 @@ p.x=Math.random()*canvas.width;
 }
 
 setInterval(draw,33);
+
+/* Scroll reveal animation */
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add("active")
+}
+})
+})
+
+document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+
 </script>
 
 </body>
