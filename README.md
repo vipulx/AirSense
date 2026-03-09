@@ -10,8 +10,6 @@ Instead of the stock LED-only indicator, this project exposes detailed environme
 
 # Project Overview
 
-![System Overview](images/overview.jpg)
-
 The original IKEA device contains a **PM1006 particulate matter sensor** but only shows air quality using a colored LED.
 
 This project taps into the sensor's **UART interface** and adds a WiFi-enabled microcontroller to expose the data digitally.
@@ -161,7 +159,6 @@ project/
  ├─ README.md
  └─ images/
       banner.jpg
-      overview.jpg
       hardware_mod.jpg
       internal_wiring.jpg
       dashboard.jpg
