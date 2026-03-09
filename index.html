@@ -8,222 +8,74 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+body{color:white;background:#020617;overflow-x:hidden}
 
-body{
-color:white;
-background:#020617;
-overflow-x:hidden;
-}
-
-/* Animated Gradient Background */
 body::before{
 content:"";
-position:fixed;
-left:0;
-top:0;
-width:100%;
-height:100%;
-background:linear-gradient(130deg,#0f172a,#1e3a8a,#0284c7,#22c55e,#0f172a);
+position:fixed;inset:0;
+background:linear-gradient(120deg,#020617,#1e3a8a,#0284c7,#22c55e,#020617);
 background-size:400% 400%;
 animation:gradient 18s ease infinite;
-z-index:-3;
+z-index:-3
 }
 
-@keyframes gradient{
-0%{background-position:0% 50%}
-50%{background-position:100% 50%}
-100%{background-position:0% 50%}
-}
+@keyframes gradient{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 
-canvas{
-position:fixed;
-left:0;
-top:0;
-z-index:-2;
-}
+canvas{position:fixed;inset:0;z-index:-2}
 
-nav{
-position:fixed;
-top:0;
-width:100%;
-padding:18px 8%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-background:rgba(0,0,0,0.25);
-backdrop-filter:blur(10px);
-z-index:100;
-}
-
-nav h3{font-weight:600}
-
-nav a{
-color:white;
-text-decoration:none;
-margin-left:20px;
-opacity:0.8;
-transition:0.3s;
-}
-
+nav{position:fixed;top:0;width:100%;padding:18px 8%;display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,0.3);backdrop-filter:blur(10px);z-index:100}
+nav a{color:white;text-decoration:none;margin-left:20px;opacity:.8;transition:.3s}
 nav a:hover{opacity:1}
 
-/* Hero */
-header{
-height:100vh;
-display:grid;
-grid-template-columns:1fr 1fr;
-align-items:center;
-padding:0 10%;
-}
+header{height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:0 10%}
 
-.hero-text h1{
-font-size:64px;
-font-weight:700;
-letter-spacing:2px;
-}
+.hero-text h1{font-size:64px;font-weight:700}
+.hero-text p{margin-top:20px;font-size:18px;opacity:.85;max-width:520px;line-height:1.6}
 
-.hero-text p{
-margin-top:20px;
-font-size:18px;
-opacity:0.85;
-max-width:520px;
-line-height:1.6;
-}
+.hero-btn{display:inline-block;margin-top:30px;padding:14px 32px;border-radius:30px;background:#22c55e;font-weight:600;text-decoration:none;color:white;transition:.3s}
+.hero-btn:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 10px 30px rgba(34,197,94,.4)}
 
-.hero-btn{
-display:inline-block;
-margin-top:30px;
-padding:14px 32px;
-border-radius:30px;
-background:#22c55e;
-font-weight:600;
-text-decoration:none;
-color:white;
-transition:0.3s;
-}
+.hero-media{display:flex;justify-content:center}
+.hero-media img{width:100%;max-width:420px;filter:drop-shadow(0 30px 60px rgba(0,0,0,.7));animation:float 6s ease-in-out infinite}
 
-.hero-btn:hover{
-transform:translateY(-4px) scale(1.03);
-box-shadow:0 10px 30px rgba(34,197,94,0.4);
-}
+@keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-20px)}100%{transform:translateY(0)}}
 
-.hero-media{
-display:flex;
-justify-content:center;
-}
+section{padding:100px 10%;max-width:1200px;margin:auto}
+section h2{font-size:38px;margin-bottom:30px}
+section p{opacity:.85;line-height:1.7}
 
-.hero-media img{
-width:100%;
-max-width:420px;
-filter:drop-shadow(0 30px 60px rgba(0,0,0,0.7));
-animation:float 6s ease-in-out infinite;
-}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px;margin-top:40px}
 
-@keyframes float{
-0%{transform:translateY(0px)}
-50%{transform:translateY(-20px)}
-100%{transform:translateY(0px)}
-}
-
-section{
-padding:100px 10%;
-max-width:1200px;
-margin:auto;
-}
-
-section h2{
-font-size:38px;
-margin-bottom:30px;
-}
-
-section p{
-opacity:0.85;
-line-height:1.6;
-}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:28px;
-margin-top:40px;
-}
-
-.card{
-background:rgba(255,255,255,0.07);
-border-radius:18px;
-padding:30px;
-backdrop-filter:blur(12px);
-transition:0.4s;
-border:1px solid rgba(255,255,255,0.05);
-}
-
-.card:hover{
-transform:translateY(-12px) scale(1.02);
-background:rgba(255,255,255,0.14);
-box-shadow:0 15px 40px rgba(0,0,0,0.5);
-}
-
-.card h3{margin-bottom:10px}
+.card{background:rgba(255,255,255,.07);border-radius:18px;padding:30px;backdrop-filter:blur(12px);transition:.4s;border:1px solid rgba(255,255,255,.05)}
+.card:hover{transform:translateY(-12px) scale(1.02);background:rgba(255,255,255,.14);box-shadow:0 15px 40px rgba(0,0,0,.5)}
 
 .image-block{text-align:center}
-
-.image-block img{
-width:100%;
-max-width:850px;
-border-radius:20px;
-margin-top:30px;
-box-shadow:0 20px 60px rgba(0,0,0,0.6);
-transition:0.5s;
-}
-
+.image-block img{width:100%;max-width:850px;border-radius:20px;margin-top:30px;box-shadow:0 20px 60px rgba(0,0,0,.6);transition:.5s}
 .image-block img:hover{transform:scale(1.03)}
 
-/* Tables */
-.table-wrap{
-overflow-x:auto;
-margin-top:30px;
-}
+.table-wrap{overflow-x:auto;margin-top:30px}
 
-table{
-width:100%;
-border-collapse:collapse;
-background:rgba(255,255,255,0.05);
-border-radius:12px;
-overflow:hidden;
-}
+table{width:100%;border-collapse:collapse;background:rgba(255,255,255,.05);border-radius:12px}
+th,td{padding:14px 16px;text-align:left}
+th{background:rgba(255,255,255,.12)}
+tr:nth-child(even){background:rgba(255,255,255,.04)}
 
-th,td{
-padding:14px 16px;
-text-align:left;
-}
+.arch{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;margin-top:40px}
+.arch div{background:rgba(255,255,255,.06);padding:25px;border-radius:16px}
 
-th{
-background:rgba(255,255,255,0.12);
-}
+.repo-box{margin-top:80px;padding:40px;border-radius:20px;background:linear-gradient(140deg,#0284c7,#22c55e);text-align:center}
+.repo-box a{display:inline-block;margin-top:18px;padding:12px 28px;background:white;color:#111;border-radius:25px;font-weight:600;text-decoration:none}
 
-tr:nth-child(even){background:rgba(255,255,255,0.04)}
+.warning{margin-top:80px;background:rgba(255,80,80,.1);border:1px solid rgba(255,80,80,.3);padding:35px;border-radius:16px}
+.warning h3{margin-bottom:10px}
 
-footer{
-text-align:center;
-padding:60px;
-opacity:0.8;
-}
-
-footer a{
-color:#22c55e;
-text-decoration:none;
-font-weight:600;
-}
-
-footer a:hover{text-decoration:underline}
+footer{text-align:center;padding:60px;opacity:.8}
+footer a{color:#22c55e;text-decoration:none;font-weight:600}
 
 .reveal{opacity:0;transform:translateY(50px);transition:1s}
 .reveal.active{opacity:1;transform:translateY(0)}
 
-@media(max-width:900px){
-header{grid-template-columns:1fr;text-align:center;padding-top:120px}
-.hero-text{margin-bottom:40px}
-}
+@media(max-width:900px){header{grid-template-columns:1fr;text-align:center;padding-top:120px}}
 
 </style>
 </head>
@@ -243,26 +95,47 @@ header{grid-template-columns:1fr;text-align:center;padding-top:120px}
 </nav>
 
 <header>
-  
-<div class="hero-media">
-<!-- PLACE YOUR 3D ROTATING PRODUCT GIF HERE -->
-<img src="images/product.png" alt="AirSense Device GIF">
-</div>
 
 <div class="hero-text">
 <h1>AirSense</h1>
-<p>Hardware‑hacked IKEA Vindriktning air quality monitor upgraded with ESP8266 firmware, smart home integration, OTA updates and live environmental monitoring.</p>
+<p>Open‑hardware air quality monitor created by modifying the IKEA Vindriktning and integrating an ESP8266 running ESPHome firmware. The project transforms a simple particulate sensor into a smart IoT environmental monitoring device integrated with Home Assistant.</p>
 <a class="hero-btn" href="#features">Explore Features</a>
 </div>
 
+<div class="hero-media">
+<img src="images/product.png" alt="AirSense Device GIF">
+</div>
 
 </header>
 
 <section id="about" class="reveal">
 <h2>Project Overview</h2>
 <p>
-AirSense is a modified IKEA Vindriktning air quality monitor converted into a fully connected IoT device using ESPHome. The project exposes particulate matter readings, ambient brightness levels, device diagnostics and WiFi metrics directly to a smart home dashboard.
+AirSense began as a hardware reverse‑engineering experiment of the IKEA Vindriktning air quality monitor. By integrating a D1 Mini ESP8266 inside the enclosure, the PM1006 particulate sensor can now transmit live environmental data to a home automation network.
 </p>
+
+<div class="arch">
+<div>
+<h4>Firmware</h4>
+<p>ESPHome firmware provides WiFi connectivity, OTA updates, and seamless Home Assistant integration.</p>
+</div>
+
+<div>
+<h4>Sensor Interface</h4>
+<p>The built‑in PM1006 particulate sensor communicates via UART and reports PM2.5 concentration levels.</p>
+</div>
+
+<div>
+<h4>Environmental Monitoring</h4>
+<p>An analog channel reads the ambient brightness level inside the device enclosure.</p>
+</div>
+
+<div>
+<h4>System Telemetry</h4>
+<p>WiFi signal strength, device uptime, heap memory, IP address and status sensors are exposed.</p>
+</div>
+</div>
+
 </section>
 
 <section id="features" class="reveal">
@@ -272,22 +145,99 @@ AirSense is a modified IKEA Vindriktning air quality monitor converted into a fu
 
 <div class="card">
 <h3>PM2.5 Monitoring</h3>
-<p>Reads particulate concentration from the internal PM1006 sensor using UART.</p>
+<p>Uses the internal PM1006 laser particle sensor to measure particulate matter concentration.</p>
 </div>
 
 <div class="card">
-<h3>Ambient Brightness</h3>
-<p>ADC sensor measures environmental light and converts it to brightness percentage.</p>
+<h3>Brightness Measurement</h3>
+<p>Analog input converts voltage values into a brightness percentage.</p>
 </div>
 
 <div class="card">
-<h3>WiFi Telemetry</h3>
-<p>Reports WiFi strength, uptime, heap memory and device status.</p>
+<h3>Fan Activity Detection</h3>
+<p>Detects internal fan activity to determine when the sensor is actively sampling air.</p>
 </div>
 
 <div class="card">
-<h3>OTA Firmware</h3>
-<p>Update firmware remotely without opening the device again.</p>
+<h3>OTA Firmware Updates</h3>
+<p>Device firmware can be updated wirelessly without opening the enclosure.</p>
+</div>
+
+<div class="card">
+<h3>Network Diagnostics</h3>
+<p>Provides WiFi signal strength, connection status, IP address and network data.</p>
+</div>
+
+<div class="card">
+<h3>System Metrics</h3>
+<p>Reports uptime, ESP8266 internal temperature and available heap memory.</p>
+</div>
+
+</div>
+
+</section>
+
+<section class="reveal">
+<h2>Exposed Sensors</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>PM2.5 Sensor</h3>
+<p>Provides particulate matter concentration used for indoor air quality monitoring.</p>
+</div>
+
+<div class="card">
+<h3>Brightness Sensor</h3>
+<p>Analog brightness reading derived from voltage on the A0 input.</p>
+</div>
+
+<div class="card">
+<h3>WiFi Signal</h3>
+<p>Reports WiFi signal strength converted into percentage.</p>
+</div>
+
+<div class="card">
+<h3>ESP8266 Temperature</h3>
+<p>Internal microcontroller temperature used for monitoring device health.</p>
+</div>
+
+<div class="card">
+<h3>Free Heap Memory</h3>
+<p>Shows available memory of the ESP8266 runtime environment.</p>
+</div>
+
+<div class="card">
+<h3>Device Uptime</h3>
+<p>Reports how long the device has been running since last restart.</p>
+</div>
+
+</div>
+</section>
+
+<section class="reveal">
+<h2>Possible Applications</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Smart Home Automation</h3>
+<p>Trigger ventilation, air purifiers or alerts based on indoor air quality.</p>
+</div>
+
+<div class="card">
+<h3>Environmental Data Logging</h3>
+<p>Store long‑term air quality data in Home Assistant dashboards.</p>
+</div>
+
+<div class="card">
+<h3>Indoor Air Studies</h3>
+<p>Monitor pollution levels caused by cooking, dust or outdoor pollution.</p>
+</div>
+
+<div class="card">
+<h3>Educational Hardware Research</h3>
+<p>Demonstrates how consumer electronics can be reverse engineered and extended.</p>
 </div>
 
 </div>
@@ -295,11 +245,20 @@ AirSense is a modified IKEA Vindriktning air quality monitor converted into a fu
 
 <section id="hardware" class="image-block reveal">
 <h2>Hardware Modification</h2>
-<p>The original sensor was opened and an ESP8266 D1 Mini was integrated with the internal PM1006 air sensor.</p>
+<p>The IKEA Vindriktning device was opened and modified to integrate a D1 Mini ESP8266. Power and UART lines from the PM1006 particulate sensor were connected to the microcontroller.</p>
 
 <img src="images/hardware_mod.png" alt="hardware">
 </section>
 
+<section class="image-block reveal">
+<h2>Dashboard Visualization</h2>
+<p>AirSense integrates with Home Assistant dashboards for real‑time environmental monitoring.</p>
+
+<img src="images/airsense_dashboard.png" alt="dashboard">
+</section>
+
+
+  
 <section id="wiring" class="reveal">
 <h2>Pin Connection Table</h2>
 
@@ -311,24 +270,24 @@ AirSense is a modified IKEA Vindriktning air quality monitor converted into a fu
 <th>Description</th>
 </tr>
 <tr>
-<td>PM1006 Sensor RX</td>
+<td>PM1006 UART RX</td>
 <td>D2 (GPIO4)</td>
-<td>UART data from particulate sensor</td>
+<td>Receives particulate sensor data</td>
 </tr>
 <tr>
 <td>I2C SDA</td>
 <td>D6 (GPIO12)</td>
-<td>Reserved I2C data line</td>
+<td>I2C data line reserved for expansion</td>
 </tr>
 <tr>
 <td>I2C SCL</td>
 <td>D5 (GPIO14)</td>
-<td>Reserved I2C clock line</td>
+<td>I2C clock line reserved for expansion</td>
 </tr>
 <tr>
-<td>Fan Detection</td>
+<td>Fan Status</td>
 <td>D4 (GPIO2)</td>
-<td>Detects fan running state</td>
+<td>Detects internal fan operation</td>
 </tr>
 <tr>
 <td>Light Sensor</td>
@@ -338,18 +297,54 @@ AirSense is a modified IKEA Vindriktning air quality monitor converted into a fu
 <tr>
 <td>Power</td>
 <td>5V / GND</td>
-<td>Power from device supply</td>
+<td>Powered from internal supply</td>
 </tr>
 </table>
 </div>
 
 </section>
 
-<section class="image-block reveal">
-<h2>Dashboard Visualization</h2>
-<p>AirSense integrates with Home Assistant dashboards for real‑time environmental monitoring.</p>
+<section class="reveal">
+<h2>Future Improvements</h2>
 
-<img src="images/airsense_dashboard.png" alt="dashboard">
+<div class="grid">
+
+<div class="card">
+<h3>CO₂ Sensor Integration</h3>
+<p>Add an I2C CO₂ sensor such as SCD40 to provide full indoor air quality monitoring.</p>
+</div>
+
+<div class="card">
+<h3>Temperature & Humidity</h3>
+<p>Integrate sensors like BME280 or SHT31 for environmental data expansion.</p>
+</div>
+
+<div class="card">
+<h3>Local Display</h3>
+<p>Add an OLED display to show real‑time air quality metrics.</p>
+</div>
+
+<div class="card">
+<h3>Bluetooth Proxy</h3>
+<p>Migrate hardware to ESP32 for Bluetooth proxy support with Home Assistant.</p>
+</div>
+
+</div>
+
+</section>
+
+<section class="reveal">
+<div class="repo-box">
+<h2>Explore the Full Project</h2>
+<p>Complete firmware, hardware documentation and build instructions are available on GitHub.</p>
+<a href="https://github.com/vipulx/AirSense" target="_blank">View GitHub Repository</a>
+</div>
+
+<div class="warning">
+<h3>Educational Disclaimer</h3>
+<p>This project is published strictly for educational purposes related to hardware reverse engineering and embedded systems learning. It is not affiliated with or endorsed by IKEA. The intention is not to harm or misuse any product ecosystem. If you believe this content is inappropriate, please contact the author for review or removal.</p>
+</div>
+
 </section>
 
 <footer>
@@ -360,58 +355,32 @@ AirSense is a modified IKEA Vindriktning air quality monitor converted into a fu
 
 const canvas=document.getElementById("particles");
 const ctx=canvas.getContext("2d");
-
 canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
 
 let particles=[];
-
 for(let i=0;i<140;i++){
-particles.push({
-x:Math.random()*canvas.width,
-y:Math.random()*canvas.height,
-r:Math.random()*2.2,
-d:Math.random()*0.7
-});
+particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2.2,d:Math.random()*0.7});
 }
 
 function draw(){
 ctx.clearRect(0,0,canvas.width,canvas.height);
 ctx.fillStyle="rgba(255,255,255,0.7)";
 ctx.beginPath();
-
 for(let i=0;i<particles.length;i++){
-let p=particles[i];
-ctx.moveTo(p.x,p.y);
-ctx.arc(p.x,p.y,p.r,0,Math.PI*2,true);
+let p=particles[i];ctx.moveTo(p.x,p.y);ctx.arc(p.x,p.y,p.r,0,Math.PI*2,true);
 }
-
-ctx.fill();
-update();
+ctx.fill();update();
 }
 
 function update(){
 for(let i=0;i<particles.length;i++){
-let p=particles[i];
-p.y+=p.d;
-
-if(p.y>canvas.height){
-p.y=0;
-p.x=Math.random()*canvas.width;
-}
-}
+let p=particles[i];p.y+=p.d;if(p.y>canvas.height){p.y=0;p.x=Math.random()*canvas.width}}
 }
 
 setInterval(draw,33);
 
-const observer=new IntersectionObserver(entries=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-entry.target.classList.add("active")
-}
-})
-})
-
+const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("active")}})});
 document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
 
 </script>
