@@ -1,0 +1,57 @@
+esphome:
+  name: airsense
+  friendly_name: AirSense
+
+esp8266:
+  board: d1_mini
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "t2MsxwhRvfqnl91zC61uj+0xoztTlRPUrmXxhIbWsmQ="
+
+ota:
+  - platform: esphome
+    password: "a02bad096bd3fb448129d198f4b3286c"
+
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Airsense Fallback Hotspot"
+    password: "$iddhart@Wif@0152"
+
+captive_portal:
+
+uart:
+  rx_pin: D2
+  baud_rate: 9600
+
+i2c:
+  sda: D6
+  scl: D5
+
+binary_sensor:
+  - platform: gpio
+    name: "Fan running"
+    id: fan_running
+    pin:
+      number: D4
+      inverted: true
+
+sensor:
+  - platform: pm1006
+    pm_2_5:
+      name: "Particulate Matter 2.5µm Concentration"
+
+  - platform: adc
+    id: light_sensor
+    name: "Light sensor"
+    pin: A0
+    update_interval: 1s
