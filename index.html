@@ -1,1 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AirSense – Smart Air Monitor</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+body{color:#fff;background:#0f172a;overflow-x:hidden}
 
+/* Animated gradient background */
+body::before{
+content:"";
+position:fixed;
+left:0;top:0;width:100%;height:100%;
+background:linear-gradient(120deg,#1e3a8a,#0ea5e9,#22c55e,#1e3a8a);
+background-size:300% 300%;
+animation:gradientMove 15s ease infinite;
+z-index:-2;
+}
+
+@keyframes gradientMove{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
+
+/* floating particles */
+canvas{position:fixed;top:0;left:0;z-index:-1}
+
+header{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:40px
+}
+
+h1{
+font-size:64px;
+font-weight:700;
+margin-bottom:20px;
+letter-spacing:2px
+}
+
+h2{
+font-weight:300;
+opacity:.9;
+margin-bottom:40px
+}
+
+.btn{
+padding:14px 30px;
+border-radius:30px;
+background:#22c55e;
+color:#fff;
+text-decoration:none;
+font-weight:600;
+transition:.3s
+}
+
+.btn:hover{transform:translateY(-3px)}
+
+section{
+padding:80px 10%;
+max-width:1200px;
+margin:auto
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:30px
+}
+
+.card{
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(10px);
+padding:30px;
+border-radius:18px;
+transition:.4s
+}
+
+.card:hover{
+transform:translateY(-10px);
+background:rgba(255,255,255,.15)
+}
+
+.card h3{margin-bottom:10px}
+
+.image-showcase{
+text-align:center
+}
+
+.image-showcase img{
+max-width:100%;
+border-radius:20px;
+margin-top:20px
+}
+
+footer{
+text-align:center;
+padding:40px;
+opacity:.7
+}
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<header>
+<h1>AirSense</h1>
+<h2>Hacked IKEA VINDRIKTNING Smart Air Monitor</h2>
+<a class="btn" href="#about">Explore Project</a>
+</header>
+
+<section id="about">
+<h2>Project Overview</h2>
+<p>
+AirSense transforms a basic air quality monitor into a fully connected smart device. Using an ESP8266 and custom firmware, the device streams environmental data directly to a smart home dashboard with real‑time monitoring and automation capabilities.
+</p>
+</section>
+
+<section>
+<h2>Key Features</h2>
+<div class="grid">
+
+<div class="card">
+<h3>Air Quality Monitoring</h3>
+<p>Real‑time PM2.5 monitoring using the internal sensor with smart home integration.</p>
+</div>
+
+<div class="card">
+<h3>WiFi Connectivity</h3>
+<p>Wireless integration enabling live data dashboards and remote firmware updates.</p>
+</div>
+
+<div class="card">
+<h3>Ambient Light Detection</h3>
+<p>Built‑in brightness sensing for automation and dashboard brightness control.</p>
+</div>
+
+<div class="card">
+<h3>Device Diagnostics</h3>
+<p>Tracks uptime, memory usage, WiFi signal strength, and device health.</p>
+</div>
+
+</div>
+</section>
+
+<section class="image-showcase">
+<h2>Hardware Hack</h2>
+<p>ESP8266 integrated inside the air sensor with UART data tapping.</p>
+<img src="images/hardware.jpg" alt="hardware image">
+</section>
+
+<section class="image-showcase">
+<h2>Smart Home Dashboard</h2>
+<p>Live data visualized on the home automation dashboard.</p>
+<img src="images/dashboard.jpg" alt="dashboard image">
+</section>
+
+<footer>
+<p>Developed by Vipul Raj</p>
+</footer>
+
+<script>
+const canvas=document.getElementById('particles');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+
+for(let i=0;i<120;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*2,
+d:Math.random()*1
+});
+}
+
+function draw(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle='rgba(255,255,255,0.6)';
+ctx.beginPath();
+
+for(let i=0;i<particles.length;i++){
+let p=particles[i];
+ctx.moveTo(p.x,p.y);
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2,true);
+}
+
+ctx.fill();
+update();
+}
+
+function update(){
+for(let i=0;i<particles.length;i++){
+let p=particles[i];
+p.y+=p.d;
+if(p.y>canvas.height){
+p.y=0;
+p.x=Math.random()*canvas.width;
+}
+}
+}
+
+setInterval(draw,33);
+</script>
+
+</body>
+</html>
