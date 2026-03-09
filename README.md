@@ -53,7 +53,7 @@ Inside the enclosure:
 
 # Home Assistant Dashboard
 
-![Home Assistant Dashboard](images/dashboard.jpg)
+![Home Assistant Dashboard](images/airsense_dashboard.png)
 
 Once connected to **Home Assistant**, the device provides real-time monitoring:
 
