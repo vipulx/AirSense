@@ -22,7 +22,7 @@ Additional monitoring and diagnostics features were implemented to make the devi
 
 # Hardware Hack
 
-![Hardware Modification](images/hardware_mod.jpg)
+![Hardware Modification](images/hardware_mod.png)
 
 The IKEA unit was opened and the internal **PM1006 air quality sensor** UART output was connected to the ESP8266.
 
