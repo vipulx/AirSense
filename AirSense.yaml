@@ -21,7 +21,7 @@ wifi:
 
   ap:
     ssid: "Airsense Fallback Hotspot"
-    password: "$iddhart@Wif@0152"
+    password: !secret wifi_password
 
 captive_portal:
 
